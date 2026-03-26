@@ -1,0 +1,87 @@
+# Price Optimization Model Configuration
+
+# Data Generation Parameters
+data:
+  n_products: 50
+  n_customers: 1000
+  n_periods: 365
+  price_range: [5.0, 100.0]
+  elasticity_range: [-3.0, -0.5]
+  cost_margin: 0.3
+  seasonality_strength: 0.2
+  random_seed: 42
+
+# Model Parameters
+models:
+  elasticity:
+    alpha: 0.1
+    l1_ratio: 0.5
+  
+  random_forest:
+    n_estimators: 100
+    max_depth: null
+    random_state: 42
+  
+  xgboost:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    random_state: 42
+  
+  lightgbm:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    random_state: 42
+  
+  gradient_boosting:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    random_state: 42
+
+# Optimization Parameters
+optimization:
+  objective: "profit"  # "revenue" or "profit"
+  price_range: [0.1, 1000.0]
+  n_points: 1000
+  
+  constraints:
+    min_margin: 0.2
+    min_revenue: 10000
+    min_market_share: 0.05
+  
+  sensitivity_analysis:
+    perturbation_range: [-0.1, 0.1]
+    n_points: 21
+
+# Evaluation Parameters
+evaluation:
+  cv_splits: 5
+  test_size: 0.2
+  metrics:
+    - "mae"
+    - "rmse"
+    - "r2"
+    - "mape"
+    - "smape"
+
+# Visualization Parameters
+visualization:
+  style: "seaborn-v0_8"
+  figure_size: [10, 6]
+  dpi: 300
+  save_plots: true
+  output_dir: "assets/plots"
+
+# Business Metrics
+business_metrics:
+  market_size: 10000
+  customer_lifespan: 2.5
+  purchase_frequency: 4.0
+  
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/price_optimization.log"
